@@ -1,24 +1,22 @@
 import React from 'react';
+import {Route, Routes} from 'react-router-dom';
 import './App.css';
-import {Product} from "./components/Product";
-import {useProducts} from "./hooks/products";
-import {Loader} from "./components/loader";
-import {ErrorMasage} from "./components/ErrorMasage";
-
+import {AboutPage} from "./pages/AboutPage";
+import {ProductsPage} from "./pages/ProductsPage";
+import {Navigation} from "./components/Navigation";
 
 
 function App() {
 
-const {products, error, loading} = useProducts()
-
-
     return (
-        <div className="container mx-auto max-w-2xl pt-5">
-            {loading && <Loader/>}
-            {error && <ErrorMasage error={error}/>}
-            {products.map(products => <Product key={products.id} product={products}/>)}
+        <>
+            <Navigation/>
+            <Routes>
+                <Route path='/' element={<ProductsPage/>}/>
+                <Route path='/about' element={<AboutPage/>}/>
+            </Routes>
+        </>
 
-        </div>
     );
 }
 
